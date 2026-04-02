@@ -1,0 +1,22 @@
+{
+  "authorized_users": [
+    {
+      "email": "your-trusted-email@gmail.com",
+      "allowed_projects": ["*"],
+      "role": "admin",
+      "status": "active"
+    },
+    {
+      "email": "partner@law-firm.com",
+      "allowed_projects": ["0001", "0003"],
+      "role": "lawyer",
+      "status": "active"
+    }
+  ],
+  "bot_config": {
+    "imap_server": "imap.gmail.com",
+    "smtp_server": "smtp.gmail.com",
+    "check_interval_sec": 60,
+    "subject_trigger": "NEXUS"
+  }
+}

@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEXUS | Житловий Аудит: Харківське Шосе, 1</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0a0c10;
+            --card-bg: rgba(23, 27, 34, 0.7);
+            --accent: #4f46e5;
+            --danger: #ef4444;
+            --warning: #f59e0b;
+            --success: #10b981;
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+            --glass: rgba(255, 255, 255, 0.03);
+            --border: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text-main);
+            min-height: 100vh;
+            background-image: 
+                radial-gradient(circle at 0% 0%, rgba(79, 70, 229, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 100% 100%, rgba(239, 68, 68, 0.05) 0%, transparent 50%);
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 3rem;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 1rem;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            letter-spacing: -0.05em;
+            background: linear-gradient(90deg, #fff, var(--text-muted));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .address {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            background: var(--glass);
+            padding: 0.5rem 1rem;
+            border-radius: 2rem;
+            border: 1px solid var(--border);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 1.5rem;
+            padding: 1.5rem;
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(79, 70, 229, 0.4);
+        }
+
+        .card-title {
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .card-value {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-subtitle {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        /* Budget breakdown */
+        .breakdown {
+            grid-column: span 2;
+        }
+
+        .progress-container {
+            margin-top: 1.5rem;
+        }
+
+        .progress-item {
+            margin-bottom: 1rem;
+        }
+
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            margin-bottom: 0.4rem;
+        }
+
+        .progress-bar {
+            height: 10px;
+            background: var(--glass);
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            border-radius: 5px;
+        }
+
+        /* Suspicious zones */
+        .risk-badge {
+            padding: 0.2rem 0.6rem;
+            border-radius: 0.5rem;
+            font-size: 0.7rem;
+            font-weight: 800;
+        }
+
+        .risk-high { background: rgba(239, 68, 68, 0.2); color: var(--danger); }
+        .risk-med { background: rgba(245, 158, 11, 0.2); color: var(--warning); }
+
+        .audit-list {
+            list-style: none;
+            margin-top: 1rem;
+        }
+
+        .audit-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.8rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .audit-item:last-child { border: none; }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+        }
+
+        .status-active { background: var(--warning); box-shadow: 0 0 10px var(--warning); }
+        .status-pending { background: var(--text-muted); }
+
+        .actions {
+            margin-top: 3rem;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 1rem;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary { background: var(--accent); color: white; }
+        .btn-primary:hover { background: #4338ca; box-shadow: 0 0 20px rgba(79, 70, 229, 0.4); }
+
+        .btn-outline { background: transparent; border: 1px solid var(--border); color: white; }
+        .btn-outline:hover { background: var(--glass); }
+
+        .footer {
+            margin-top: 4rem;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+        }
+
+        @media (max-width: 768px) {
+            .grid { grid-template-columns: 1fr; }
+            .breakdown { grid-column: auto; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">NEXUS // HOUSING.AUDIT</div>
+            <div class="address">вул. шосе Харківське, 1 | ЖЕД 404</div>
+        </header>
+
+        <div class="grid">
+            <!-- Main Stats -->
+            <div class="card">
+                <div class="card-title">Річний бюджет <span class="risk-badge risk-med">Обслуговування</span></div>
+                <div class="card-value">516 756 <span style="font-size: 1rem; color: var(--text-muted)">грн</span></div>
+                <div class="card-subtitle">Загальна сума зборів з будинку на рік</div>
+            </div>
+
+            <div class="card">
+                <div class="card-title">Оборот Керуючої Компанії <span class="risk-badge risk-high">Район</span></div>
+                <div class="card-value">330.3 <span style="font-size: 1rem; color: var(--text-muted)">Млн грн</span></div>
+                <div class="card-subtitle">Фінансовий масштаб КП за 2024 рік</div>
+            </div>
+
+            <div class="card">
+                <div class="card-title">Тариф <span class="risk-badge risk-med">Базовий</span></div>
+                <div class="card-value">10.51 <span style="font-size: 1rem; color: var(--text-muted)">грн/м²</span></div>
+                <div class="card-subtitle">Витрати на 1 м² житлової площі</div>
+            </div>
+
+            <!-- Breakdown Card -->
+            <div class="card breakdown">
+                <div class="card-title">Профіль Витрат (Річний план)</div>
+                <div class="progress-container">
+                    <div class="progress-item">
+                        <div class="progress-label">
+                            <span>Поточний ремонт (п. 1.6)</span>
+                            <span style="color: var(--danger)">132 810 грн (25.7%)</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 25.7%; background: var(--danger);"></div>
+                        </div>
+                    </div>
+                    <div class="progress-item">
+                        <div class="progress-label">
+                            <span>Прибирання території (п. 1.9)</span>
+                            <span style="color: var(--warning)">109 340 грн (21.1%)</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 21.1%; background: var(--warning);"></div>
+                        </div>
+                    </div>
+                    <div class="progress-item">
+                        <div class="progress-label">
+                            <span>Обслуговування систем (п. 1.1)</span>
+                            <span>69 798 грн (13.5%)</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 13.5%; background: var(--accent);"></div>
+                        </div>
+                    </div>
+                    <div class="progress-item">
+                        <div class="progress-label">
+                            <span>Вивезення снігу (п. 1.11)</span>
+                            <span style="color: var(--danger)">14 824 грн (2.8%)</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 2.8%; background: var(--danger);"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Audit Status -->
+            <div class="card">
+                <div class="card-title">Статус Юридичних Дій</div>
+                <ul class="audit-list">
+                    <li class="audit-item">
+                        <div class="status-dot status-active"></div>
+                        <div>
+                            <div style="font-size: 0.9rem; font-weight: 600;">Запит на публічну інформацію</div>
+                            <div style="font-size: 0.7rem; color: var(--text-muted)">Підготовлено до відправки</div>
+                        </div>
+                    </li>
+                    <li class="audit-item">
+                        <div class="status-dot status-pending"></div>
+                        <div>
+                            <div style="font-size: 0.9rem; font-weight: 600;">Скарга на 1551 (Сніг/Суміші)</div>
+                            <div style="font-size: 0.7rem; color: var(--text-muted)">Очікування ініціації</div>
+                        </div>
+                    </li>
+                    <li class="audit-item">
+                        <div class="status-dot status-pending"></div>
+                        <div>
+                            <div style="font-size: 0.9rem; font-weight: 600;">Акт про ненадання послуг</div>
+                            <div style="font-size: 0.7rem; color: var(--text-muted)">Потрібен збір підписів</div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card" style="background: rgba(239, 68, 68, 0.05); border-color: rgba(239, 68, 68, 0.2);">
+            <div class="card-title" style="color: var(--danger)">Зони найвищого ризику (Grey Zones)</div>
+            <p style="font-size: 0.9rem; line-height: 1.6; color: var(--text-muted)">
+                Згідно зі свідченнями мешканців, роботи за статтями <strong>1.6 (Ремонт конструкцій)</strong> та <strong>1.11 (Сніг/Суміші)</strong> фактично не проводяться. Це створює потенційне нецільове використання коштів у розмірі понад <strong>147 000 грн на рік</strong> тільки за цими двома напрямками.
+            </p>
+        </div>
+
+        <div class="actions">
+            <button class="btn btn-primary" onclick="window.print()">Зберегти (PDF за версією 2026)</button>
+            <button class="btn btn-outline">Панель ОСББ (Coming soon)</button>
+        </div>
+
+        <div class="footer">
+            Generated by NEXUS Polymorph v4.1 | 2026-03-05
+        </div>
+    </div>
+</body>
+</html>
