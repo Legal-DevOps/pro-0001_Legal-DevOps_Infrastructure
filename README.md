@@ -1,154 +1,162 @@
+<div align="center">
+  <a href="https://legal-devops.vercel.app/" target="_blank">
+    <img src="https://img.shields.io/badge/LIVE_DEMO-legal--devops.vercel.app-10b981?style=for-the-badge&logo=vercel&logoColor=white" alt="Live Demo" />
+  </a>
+</div>
+
+<br>
+
 # ⚖️ Legal-DevOps Infrastructure
->
+
 > **Law as Code. Data as State. Justice as a Process.**
 
-Система автоматизированного управления сложными юридическими кейсами.  
-Построена на принципах DevOps: каждое дело — это проект с базой данных, задачами, историей и дашбордом.
+An automated management system for complex legal cases.
+Built on DevOps principles: every case is treated as a software project with its own isolated database, task tracker, audit trail, and dashboard.
 
 ---
 
-## 🧠 Архитектура: Мультиагентная Система (MAS)
+## 🧠 Architecture: Multi-Agent System (MAS)
 
-Проект управляется **5 специализированными агентами**, каждый со своей областью ответственности:
+The project is orchestrated by **5 specialized agents**, each handling a specific domain of responsibility:
 
-| AGT | Агент | Роль | Файл |
+| AGT | Agent | Role | File |
 |:---:|:---|:---|:---|
-| AGT-000 | **NEXUS Orchestrator** | Декомпозиция, приоритизация, маршрутизация | `NEXUS_ORCHESTRATOR.py` |
-| AGT-001 | **Legal Analyst** | Chain-of-Thought анализ, Hallucination Guard | *(режим Nexus)* |
-| AGT-002 | **Archivist** | SHA256-верификация, JSON-память, контекст | `archivarius_core.py` |
-| AGT-003 | **Comms Agent** | Telegram/Email, HITL-контроль перед отправкой | `send_dna_to_telegram.py` |
-| AGT-004 | **Psychology Analyst** | Тональность ответов, тактика переговоров | `analyze_response.py` |
+| AGT-000 | **NEXUS Orchestrator** | Task decomposition, prioritization, and routing | `NEXUS_ORCHESTRATOR.py` |
+| AGT-001 | **Legal Analyst** | Chain-of-Thought reasoning, Hallucination Guard | *(Nexus mode)* |
+| AGT-002 | **Archivist** | SHA256-verification, JSON-memory, context management | `archivarius_core.py` |
+| AGT-003 | **Comms Agent** | Telegram/Email interfacing, pre-send HITL control | `send_dna_to_telegram.py` |
+| AGT-004 | **Psychology Analyst** | Bureaucratic tone analysis, negotiation tactics | `analyze_response.py` |
 
-Манифест всех агентов с промпт-инструкциями: [`agents_manifest.json`](./agents_manifest.json)
+Comprehensive Agent Prompt Manifest: [`agents_manifest.json`](./agents_manifest.json)
 
 ---
 
-## 📂 Структура Проекта
+## 📂 Project Structure
 
-```
+```text
 pro-0001_Legal-DevOps_Infrastructure/
 │
-├── 📊 dashboard.html              ← Точка входа (открыть в браузере)
-├── 🤖 NEXUS_ORCHESTRATOR.py       ← Центральный диспетчер системы
-├── 🧱 archivarius_core.py         ← Движок архива и рендерер дашборда
-├── 🔍 analyze_response.py         ← AGT-004: Психологический анализ (NEW)
-├── 📋 legal_questionnaire.py      ← Ассистент-опросник для сбора фактов
-├── 📦 setup_dashboard.py          ← Инициализация задач и сборка UI
-├── 🔢 renumber_docs.py            ← Нумерация документов архива
-├── 📡 send_dna_to_telegram.py     ← Отправка документов в Telegram
-├── 📜 agents_manifest.json        ← Манифест мультиагентной системы
-├── 📘 MODERNIZATION_ROADMAP.md    ← Дорожная карта развития
+├── 📊 dashboard.html              ← Entry point (open in browser)
+├── 🤖 NEXUS_ORCHESTRATOR.py       ← Central system dispatcher
+├── 🧱 archivarius_core.py         ← Archive engine and dashboard renderer
+├── 🔍 analyze_response.py         ← AGT-004: Psychological analysis (NEW)
+├── 📋 legal_questionnaire.py      ← Interactive assistant for fact gathering
+├── 📦 setup_dashboard.py          ← UI and task initialization
+├── 🔢 renumber_docs.py            ← Archive document sequencer
+├── 📡 send_dna_to_telegram.py     ← Telegram notification relay
+├── 📜 agents_manifest.json        ← Multi-Agent System Manifest
+├── 📘 MODERNIZATION_ROADMAP.md    ← Development Roadmap
 │
 ├── archive/
-│   └── 0001/                      ← Кейс #0001 (активный)
+│   └── 0001/                      ← Demo Case
 │       ├── dashboard.html         ← Premium Dashboard 2.0
 │       ├── database/
-│       │   ├── case_info.json     ← Основная информация о деле
-│       │   ├── parties.json       ← Участники (стороны, свидетели)
-│       │   ├── tasks.json         ← Задачи с дедлайнами и статусами
-│       │   └── history.json       ← Полный журнал событий (audit trail)
-│       ├── final_output/          ← 24 пронумерованных документа (001–024)
-│       ├── plan/                  ← Стратегии и планы действий
-│       ├── logs/                  ← Логи агентов (psych_analysis_log.json)
-│       └── raw_data/              ← Исходные данные и улики
+│       │   ├── case_info.json     ← Core case metadata
+│       │   ├── parties.json       ← Stakeholders (Plaintiffs, Witnesses)
+│       │   ├── tasks.json         ← Deadlines and task orchestration
+│       │   └── history.json       ← Complete event logger (audit trail)
+│       ├── final_output/          ← Enumerated output documents (001–024)
+│       ├── plan/                  ← Strategic action plans
+│       ├── logs/                  ← Agent event logs
+│       └── raw_data/              ← Raw evidence files
 │
 └── database/
-    ├── government_registry.json   ← Реестр госорганов Украины
-    └── ngo_registry.json          ← Реестр НКО и правозащитных организаций
+    ├── government_registry.json   ← Local Government Registry Config
+    └── ngo_registry.json          ← NGO and Human Rights DB
 ```
 
 ---
 
-## 🚀 Быстрый Старт (NEXUS CLI)
+## 🚀 Quick Start (NEXUS CLI)
 
-Все команды доступны через единую точку входа — `nexus.py`:
+All operations are executed through the centralized entry point — `nexus.py`:
 
-```powershell
-# Список всех кейсов с прогрессом
+```shell
+# View all cases and progress
 python nexus.py cases
 
-# Детальный статус кейса (задачи, участники, документы, дедлайны)
+# Detailed case status (tasks, participants, documents, deadlines)
 python nexus.py status 0001
 
-# Пересобрать Dashboard
+# Rebuild operational Dashboard
 python nexus.py dashboard
 
-# Анализ ответа госоргана (AGT-004: психоанализ)
+# Parse government response (AGT-004: Psychoanalysis)
 python nexus.py analyze --file "path/to/letter.txt"
 
-# Отправить документ в Telegram (с HITL-подтверждением)
+# Push document via Telegram (with HITL confirmation)
 python nexus.py send --case 0001 --doc 004
 
-# Проверка целостности кейса (SHA256, файлы, JSON)
+# Verify case integrity (SHA256, File checks, JSON structural integrity)
 python nexus.py audit 0001
 
-# Интерактивный опросник для сбора фактов
+# Launch interactive fact-gathering questionnaire
 python nexus.py questionnaire
 
-# Полная сборка системы
+# Execute full system build step
 python nexus.py assembly
 ```
 
-> Старые команды (`python setup_dashboard.py`, `python analyze_response.py` и т.д.) по-прежнему работают.
+> Legacy command scripts (`python setup_dashboard.py`, `analyze_response.py`, etc.) are still backwards compatible.
 
 ---
 
-## 📊 Dashboard 2.0 — Возможности
+## 📊 Dashboard 2.0 — Core Features
 
-| Функция | Описание |
+| Feature | Description |
 |:---|:---|
-| 🔍 **Поиск в реальном времени** | Мгновенная фильтрация по всем задачам и документам |
-| 📊 **Прогресс-бар дела** | Визуальный индикатор `done/total` задач |
-| 🔥 **Дедлайн-индикаторы** | Автоматически: `🔥 Горит! 3д`, `⚠️ Скоро`, `🚨 Просрочено` |
-| 🚨 **Приоритет-бейджи** | `CRITICAL` / `HIGH` / `NORMAL` с цветовой кодировкой |
-| 🗄️ **Evidence Vault** | Реестр всех 24 документов с SHA256-хешами |
-| 📋 **Копировать RU/UA** | Мгновенное копирование текста документа в буфер |
-| 📥 **Скачать MD** | Скачивание Markdown-файла прямо из карточки |
-| 📱 **Telegram Push** | Отправка документов через бота одной командой |
+| 🔍 **Real-Time Search** | Instant filtering across all tasks and evidentiary documents |
+| 📊 **Case Progress Bar** | Visual indicator for `done/total` task states |
+| 🔥 **Deadline Tracking** | Automated states: `🔥 Urgent! 3d left`, `⚠️ Upcoming`, `🚨 Overdue` |
+| 🚨 **Priority Badges** | `CRITICAL` / `HIGH` / `NORMAL` color-coded severity metrics |
+| 🗄️ **Evidence Vault** | Registry of documents heavily integrated with SHA256 hashes |
+| 📋 **Quick Copy** | One-click copy document payload to clipboard |
+| 📥 **Download MD** | Download markdown files directly from the execution card |
+| 📱 **Telegram Push** | Submits rendered files via Telegram bots in a single execution |
 
 ---
 
-## 🗄️ Evidence Vault (Реестр Документов)
+## 🗄️ Evidence Vault (Document Registry)
 
-Все документы в `final_output/` пронумерованы по стандарту `NNN_NAME.md`:
+All rendered evidence pieces in `final_output/` follow strict standard formatting `NNN_NAME.md`:
 
-| № | Документ | Назначение |
+| ID | Document | Purpose |
 |:---:|:---|:---|
-| 001 | `Legal_Brief_Template_EN` | Стандартный правовой бриф |
-| 002 | `Official_Inquiry_Gov` | Запрос в государственные реестры |
-| 003 | `Court_Appeal_Draft` | Черновик досудебной претензии |
-| 004 | `International_Appeal_EN` | Апелляция в международные инстанции |
+| 001 | `Legal_Brief_Template_EN` | Standardized foundational legal brief |
+| 002 | `Official_Inquiry_Gov` | Inquiry aimed at federal data registries |
+| 003 | `Court_Appeal_Draft` | Standardized draft for pre-trial litigation |
+| 004 | `International_Appeal_EN` | Specialized layout for international body submission |
 
 ---
 
-## 🤖 AGT-004: Психологический Анализатор
+## 🤖 AGT-004: Psychological Analyzer
 
-Определяет **тональность** ответа госоргана и даёт стратегию переговоров:
+Parses the **bureaucratic semantic tone** behind government letters and calculates counter-tactics:
 
+```text
+🔴 HOSTILE     → Tactic: De-escalation + Evidentiary Shield
+🟠 DEFENSIVE   → Tactic: Scope narrowing + Responsibility assertion
+🟡 BUREAUCRATIC→ Tactic: Deadline control + Legal Escalation
+🔵 NEUTRAL     → Tactic: Clarification + Additional data provision
+🟢 COOPERATIVE → Tactic: Accelerated processing + Agreement lock-in
 ```
-🔴 HOSTILE     → Тактика: De-escalation + Правовой Щит
-🟠 DEFENSIVE   → Тактика: Сужение запроса + Ответственность  
-🟡 BUREAUCRATIC→ Тактика: Контроль дедлайна + Эскалация
-🔵 NEUTRAL     → Тактика: Уточнение + Предоставление данных
-🟢 COOPERATIVE → Тактика: Ускорение + Фиксация договоренности
-```
 
-Дополнительно: **детектор манипуляций** (атака на статус, блокирование, перекладывание).
+Features embedded **manipulation detectors** (status attack patterns, blockading, and responsibility shifting).
 
 ---
 
-## 🛡️ Принципы Безопасности
+## 🛡️ Security Protocol
 
-- **HITL (Human-in-the-Loop)**: любая отправка в госорган требует явного подтверждения
-- **SHA256 Verification**: все финальные документы имеют хеш-подпись для гарантии неизменности
-- **Audit Trail**: каждое действие логируется в `history.json` с timestamp
-- **Env Variables**: API-ключи хранятся только в `.env`, не в коде
+- **HITL (Human-in-the-Loop)**: Any payload delivery to external entities requires strict manual supervisor execution.
+- **SHA256 Verification**: Final documents adopt hash footprints to enforce immutable provenance.
+- **Audit Trail**: Every action logged internally to `history.json` complete with Unix timestamps.
+- **Env Integrity**: API keys stored securely and solely via ignored `.env` config.
 
 ---
 
-## 📋 Ролевая Карта Участников
+## 📋 Stakeholder Role Map
 
-| Роль | Имя | Контакт |
+| Role | Alias | Contact Vector |
 |:---|:---|:---|
 | Subject | [Client ID / Name] | [Encrypted Contact] |
 | Defendant | [Corporate / Entity Name] | [Legal Dep. Email] |
@@ -156,14 +164,14 @@ python nexus.py assembly
 
 ---
 
-## 🗺️ Дорожная Карта
+## 🗺️ Roadmap Array
 
-Подробнее: [`MODERNIZATION_ROADMAP.md`](./MODERNIZATION_ROADMAP.md)
+Development tracking available at: [`MODERNIZATION_ROADMAP.md`](./MODERNIZATION_ROADMAP.md)
 
-- [ ] **Phase Alpha**: NLP-парсер входящих PDF/фото документов
-- [ ] **Phase Beta**: Multi-Case Manager (параллельные дела 0002, 0003...)
-- [ ] **Phase Gamma**: Auto-Deadline Notifier через Telegram бота
+- [ ] **Phase Alpha**: Baseline NLP parser for ingestion of physical PDF/Photo documents
+- [ ] **Phase Beta**: Multi-Case Context Manager (operating on concurrent branches 0002, 0003...)
+- [ ] **Phase Gamma**: Automated Deadline Pinging via customized Telegram Daemons
 
 ---
 
-*Powered by **Antigravity Nexus** | Legal-DevOps v2.0 | 2026*
+*Powered by **Antigravity Nexus** | Legal-DevOps v4.0 | 2026*
